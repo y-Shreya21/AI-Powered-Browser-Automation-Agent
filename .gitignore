@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env
+
+# Playwright screenshots
+*.png
+
+# Logs
+logs/
+*.log
+
+# macOS
+.DS_Store
+
+# Testing
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Database
+*.db
+
+# Build
+dist/
+build/
