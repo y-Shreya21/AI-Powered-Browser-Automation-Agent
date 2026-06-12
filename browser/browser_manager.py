@@ -21,35 +21,43 @@ class BrowserManager:
 
     # Task 2
     def goto(self, url: str):
-        self.page.goto(url)
+        if self.page:
+            self.page.goto(url)
+        else:
+            raise Exception("Browser not started")
 
     # Task 3
     def click(self, selector: str):
-        self.page.click(selector)
+        if self.page:
+            self.page.click(selector)
+        else:
+            raise Exception("Browser not started")
 
     # Task 4
     def type(self, selector: str, text: str):
-        self.page.fill(selector, text)
+        if self.page:
+            self.page.fill(selector, text)
+        else:
+            raise Exception("Browser not started")
 
     # Task 5
     def screenshot(self, filename="page.png"):
-        self.page.screenshot(path=filename)
+        if self.page:
+            self.page.screenshot(path=filename)
+        else:
+            raise Exception("Browser not started")
 
     # Task 6
     def extract_text(self):
-        return self.page.text_content("body")
+        if self.page:
+            return self.page.text_content("body")
+        else:
+            raise Exception("Browser not started")
 
     def stop(self):
-        self.browser.close()
-        self.playwright.stop()
-    def goto(self, url: str):
-        self.page.goto(url)
-        self.page.wait_for_load_state("networkidle")
-
-    def click(self, selector: str):
-        self.page.click(selector).click()
-
-    def type(self, selector: str, text: str):
-        self.page.locator(selector).fill(text)
-
-    
+        if self.browser:
+            self.browser.close()
+        if self.playwright:
+            self.playwright.stop()
+        if self.playwright:
+            self.playwright.stop()

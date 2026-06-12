@@ -10,7 +10,11 @@ browser.screenshot("google.png")
 
 text = browser.extract_text()
 
-print(text[:500])
+if text:
+    print(text[:500])
+else:
+    print("No text found")
+
 input("Press Enter to close...")
 
 browser.stop()
