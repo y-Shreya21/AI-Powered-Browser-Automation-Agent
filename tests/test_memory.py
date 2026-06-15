@@ -1,6 +1,10 @@
 # tests/test_memory.py
 
-from memory.memory_manger import MemoryManager
+from sqlalchemy.orm import Session
+
+from memory.memory_manager import MemoryManager
+from memory.models import Memory
+from storage.database import engine
 
 memory = MemoryManager()
 
@@ -10,5 +14,7 @@ memory.add_memory(
     observation="Found 120 jobs"
 )
 
-for item in memory.get_memories():
-    print(item)
+with Session(engine) as session:
+    memories = session.query(Memory).all()
+    for memory in memories:
+        print(memory)

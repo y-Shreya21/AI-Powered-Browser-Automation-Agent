@@ -1,5 +1,9 @@
 from datetime import datetime
-from memory.models import MemoryEntry
+
+from sqlalchemy.orm import Session
+
+from memory.models import Memory
+from storage.database import engine
 
 
 class MemoryManager:
@@ -13,14 +17,13 @@ class MemoryManager:
         action,
         observation
     ):
-        memory = MemoryEntry(
+        memory = Memory(
             goal=goal,
             action=action,
             observation=observation,
             timestamp=datetime.now()
         )
 
-        self.memories.append(memory)
-
-    def get_memories(self):
-        return self.memories
+        with Session(engine) as session:
+            session.add(memory)
+            session.commit()
